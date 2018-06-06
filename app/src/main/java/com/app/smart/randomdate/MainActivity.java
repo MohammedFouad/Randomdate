@@ -18,16 +18,18 @@ import static java.lang.Math.random;
 
 public class MainActivity extends AppCompatActivity {
 
-TextView dayRandomNumber,monthRandomNumber,yearRandomNumber;
+TextView dayRandomNumber,monthRandomNumber,yearRandomNumber, trialCount;
 Button generateRandomNumber;
 
 Random r;
 
-int randomDay, randomMonth, randomYear;
+int randomDay, randomMonth, randomYear, trialCountNumber;
 
 int max = 30;
 
 int min = 0;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,9 +44,13 @@ int min = 0;
 
         yearRandomNumber= findViewById(R.id.random_year_text_view);
 
+        trialCount = findViewById(R.id.trialCount);
+
         generateRandomNumber = findViewById(R.id.generate_random_number);
 
-        final int result = ((int)(Math.random() * 10)) + 1;
+        //final int result = ((int)(Math.random() * 10)) + 1;
+
+        trialCountNumber = 0;
 
         //Log.d("TAG", getString(random));
 
@@ -71,10 +77,11 @@ int min = 0;
                 randomDay =r.nextInt(26 ) + 1;
             }
 
-
+            trialCountNumber++;
             dayRandomNumber.setText(String.valueOf(randomDay));
             monthRandomNumber.setText(String.valueOf(randomMonth));
             yearRandomNumber.setText(String.valueOf(randomYear));
+            trialCount.setText(String.valueOf(trialCountNumber));
             }
         });
 
