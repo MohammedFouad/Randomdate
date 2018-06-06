@@ -1,0 +1,22 @@
+<resources>
+    <string name="app_name">Random date</string>
+
+    <!-- hint-->
+
+    <string name="day_random_number">day</string>
+
+    <string name="month_random_number">month</string>
+
+    <string name="year_random_number">year</string>
+
+    <string name="lucky">Luck</string>
+
+    <!-- text view-->
+    <string name="day">Day</string>
+    <string name="month">Month</string>
+    <string name="year">Year</string>
+
+
+    <!-- Button-->
+    <string name="generate_random_number">Generate random number</string>
+</resources>
