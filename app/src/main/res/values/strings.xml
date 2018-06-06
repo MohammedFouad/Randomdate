@@ -9,7 +9,7 @@
 
     <string name="year_random_number">year</string>
 
-    <string name="lucky">Luck</string>
+    <string name="lucky">0</string>
 
     <!-- text view-->
     <string name="day">Day</string>
