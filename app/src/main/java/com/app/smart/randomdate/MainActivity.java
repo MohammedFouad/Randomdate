@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -33,6 +34,9 @@ int dayToGet, monthToGet, yearToGet;
 
 String dayUser, monthUser, yearUser;
 
+CheckBox easyCheckBox, mediumCheckBox, hardCheckBox;
+
+
 
 
     @Override
@@ -56,6 +60,11 @@ String dayUser, monthUser, yearUser;
 
         generateRandomNumber = findViewById(R.id.generate_random_number);
 
+        //check box declaration
+        easyCheckBox        = findViewById(R.id.easyCheckBox);
+        mediumCheckBox      = findViewById(R.id.mediumCheckBox);
+        hardCheckBox        = findViewById(R.id.hardCheckBox);
+
         //initial value for counter
         trialCountNumber = 0;
 
@@ -72,49 +81,101 @@ String dayUser, monthUser, yearUser;
                 yearUser    = yearEnteredNumber.getText().toString();
 
 
+                if(easyCheckBox.isChecked()){
+
+                        if (!dayUser.equals("") &&
+                            !monthUser.equals("") &&
+                            !yearUser.equals(""))
+                        {
+                            dayToGet = Integer.parseInt(dayUser);
+                            monthToGet = Integer.parseInt(monthUser);
+                            yearToGet = Integer.parseInt(yearUser);
+
+                            randomDay = random.nextInt(30)+1 ;
+                            randomMonth = random.nextInt(1) +monthToGet;
+                            randomYear = random.nextInt(1) +yearToGet;
+
+                            if (randomDay == dayToGet &&
+                                    randomMonth == monthToGet &&
+                                    randomYear == yearToGet) {
+
+                                trialCount.setTextColor(getResources().getColor(R.color.colorAccent));
+                                Toast.makeText(MainActivity.this, " well done ", Toast.LENGTH_LONG).show();
+                            }
+
+                            trialCountNumber++;
+
+                            dayRandomNumber.setText(String.valueOf(randomDay));
+                            monthRandomNumber.setText(String.valueOf(randomMonth));
+                            yearRandomNumber.setText(String.valueOf(randomYear));
+                            trialCount.setText(String.valueOf(trialCountNumber));
+                        }else{
+                            Toast.makeText(MainActivity.this," Please set your date data",Toast.LENGTH_LONG).show();
+                        }
+                }
+                if (mediumCheckBox.isChecked()){
 
 
+                    if (!dayUser.equals("") &&
+                            !monthUser.equals("") &&
+                            !yearUser.equals(""))
+                    {
+                        dayToGet = Integer.parseInt(dayUser);
+                        monthToGet = Integer.parseInt(monthUser);
+                        yearToGet = Integer.parseInt(yearUser);
 
-                if (!dayUser.equals("") &&
-                    !monthUser.equals("") &&
-                    !yearUser.equals(""))
-                {
-                    dayToGet = Integer.parseInt(dayUser);
-                    monthToGet = Integer.parseInt(monthUser);
-                    yearToGet = Integer.parseInt(yearUser);
+                        randomDay = random.nextInt(30)+1 ;
+                        randomMonth = random.nextInt(2) +monthToGet;
+                        randomYear = random.nextInt(1) +yearToGet;
 
-                    randomDay = random.nextInt(dayToGet) +1;
-                    randomMonth = random.nextInt(monthToGet) +1;
-                    randomYear = random.nextInt(yearToGet) +1;
+                        if (randomDay == dayToGet &&
+                                randomMonth == monthToGet &&
+                                randomYear == yearToGet) {
 
-                    if (randomDay == dayToGet &&
-                            randomMonth == monthToGet &&
-                            randomYear == yearToGet) {
+                            trialCount.setTextColor(getResources().getColor(R.color.colorAccent));
+                            Toast.makeText(MainActivity.this, " correct", Toast.LENGTH_LONG).show();
 
-                        trialCount.setTextColor(getResources().getColor(R.color.colorAccent));
-                        Toast.makeText(MainActivity.this, " correct", Toast.LENGTH_LONG).show();
+                        }
+                        trialCountNumber++;
+
+                        dayRandomNumber.setText(String.valueOf(randomDay));
+                        monthRandomNumber.setText(String.valueOf(randomMonth));
+                        yearRandomNumber.setText(String.valueOf(randomYear));
+                        trialCount.setText(String.valueOf(trialCountNumber));
+                    }else{
+                        Toast.makeText(MainActivity.this," Please set your date data",Toast.LENGTH_LONG).show();
                     }
-                    /*
-                    if (randomMonth == 1 && randomDay==30){
-                        randomDay =random.nextInt(27 ) + 1;
+                }
+                if(hardCheckBox.isChecked()){
+                    if (!dayUser.equals("") &&
+                            !monthUser.equals("") &&
+                            !yearUser.equals(""))
+                    {
+                        dayToGet = Integer.parseInt(dayUser);
+                        monthToGet = Integer.parseInt(monthUser);
+                        yearToGet = Integer.parseInt(yearUser);
+
+                        randomDay = random.nextInt(30)+1 ;
+                        randomMonth = random.nextInt(11) +1;
+                        randomYear = random.nextInt(2) +yearToGet;
+
+                        if (randomDay == dayToGet &&
+                                randomMonth == monthToGet &&
+                                randomYear == yearToGet) {
+                            trialCount.setTextColor(getResources().getColor(R.color.colorAccent));
+                            Toast.makeText(MainActivity.this, " correct", Toast.LENGTH_LONG).show();
+                        }
+
+                        trialCountNumber++;
+
+                        dayRandomNumber.setText(String.valueOf(randomDay));
+                        monthRandomNumber.setText(String.valueOf(randomMonth));
+                        yearRandomNumber.setText(String.valueOf(randomYear));
+                        trialCount.setText(String.valueOf(trialCountNumber));
+                    }else{
+                        Toast.makeText(MainActivity.this," Please set your date data",Toast.LENGTH_LONG).show();
                     }
 
-                    if (randomMonth == 1 && randomDay==29){
-                        randomDay =random.nextInt(25 ) + 1;
-                    }
-
-                    if (randomMonth == 1 && randomDay==28){
-                        randomDay =random.nextInt(26 ) + 1;
-                    }
-                    */
-                    trialCountNumber++;
-
-                    dayRandomNumber.setText(String.valueOf(randomDay));
-                    monthRandomNumber.setText(String.valueOf(randomMonth));
-                    yearRandomNumber.setText(String.valueOf(randomYear));
-                    trialCount.setText(String.valueOf(trialCountNumber));
-                }else{
-                    Toast.makeText(MainActivity.this," Please set your date data",Toast.LENGTH_LONG).show();
                 }
             }
         });

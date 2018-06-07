@@ -16,6 +16,11 @@
     <string name="month">Month</string>
     <string name="year">Year</string>
 
+    <!-- check box-->
+    <string name="easy">easy</string>
+    <string name="medium">Medium</string>
+    <string name="hard">Hard</string>
+
 
     <!-- Button-->
     <string name="generate_random_number">Generate random number</string>

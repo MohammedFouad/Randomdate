@@ -4,8 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:padding="16dp"
     tools:context=".MainActivity"
-    android:padding="16dp">
+    >
 
     <LinearLayout
         android:id="@+id/displayDataLinearLayout"
@@ -17,7 +18,8 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.221">
+        app:layout_constraintVertical_bias="0.221"
+        android:background="@color/colorAccent">
 
         <!-- day layout-->
         <LinearLayout
@@ -32,10 +34,10 @@
                 android:text="@string/day" />
 
             <TextView
+                android:textSize="25sp"
                 android:id="@+id/random_day_text_view"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:hint="@string/day_random_number"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
@@ -57,10 +59,10 @@
                 android:text="@string/month" />
 
             <TextView
+                android:textSize="25sp"
                 android:id="@+id/random_month_text_view"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:hint="@string/month_random_number"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
@@ -83,11 +85,11 @@
 
 
             <TextView
+                android:textSize="25sp"
                 android:id="@+id/random_year_text_view"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:hint="@string/year_random_number"
-                app:layout_constraintBottom_toBottomOf="parent"
+                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -106,7 +108,8 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.559">
+        app:layout_constraintVertical_bias="0.559"
+        android:background="@color/colorPrimary">
 
         <!-- day layout-->
         <LinearLayout
@@ -121,6 +124,7 @@
                 android:text="@string/day" />
 
             <EditText
+                android:textSize="25sp"
                 android:id="@+id/entered_day_text_view"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -145,6 +149,7 @@
                 android:text="@string/month" />
 
             <EditText
+                android:textSize="25sp"
                 android:id="@+id/entered_month_text_view"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -170,6 +175,7 @@
 
 
             <EditText
+                android:textSize="25sp"
                 android:id="@+id/entered_year_text_view"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -198,12 +204,83 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/displayDataLinearLayout" />
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toTopOf="@+id/generate_random_number"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/easy" />
+
+            <CheckBox
+                android:id="@+id/easyCheckBox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/medium" />
+
+            <CheckBox
+                android:id="@+id/mediumCheckBox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/hard" />
+
+            <CheckBox
+                android:id="@+id/hardCheckBox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+
+    </LinearLayout>
 
     <Button
         android:id="@+id/generate_random_number"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
+        android:background="@color/colorAccent"
         android:text="@string/generate_random_number"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
