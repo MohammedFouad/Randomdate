@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="16dp"
+    android:background="@drawable/randombackground"
     tools:context=".MainActivity"
     >
 
@@ -18,8 +19,7 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.221"
-        android:background="@color/colorAccent">
+        app:layout_constraintVertical_bias="0.221">
 
         <!-- day layout-->
         <LinearLayout
@@ -30,11 +30,13 @@
 
             <TextView
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/day" />
+                android:layout_height="wrap_content" />
 
             <TextView
-                android:textSize="25sp"
+                android:textSize="35sp"
+                android:hint="day "
+                android:background="@drawable/textfieldshape"
+                android:textColor="@color/colorTrialCount"
                 android:id="@+id/random_day_text_view"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -55,11 +57,13 @@
 
             <TextView
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/month" />
+                android:layout_height="wrap_content" />
 
             <TextView
-                android:textSize="25sp"
+                android:textSize="35sp"
+                android:hint="month"
+                android:textColor="@color/colorTrialCount"
+                android:background="@drawable/border"
                 android:id="@+id/random_month_text_view"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -80,13 +84,14 @@
 
             <TextView
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/year" />
+                android:layout_height="wrap_content" />
 
 
             <TextView
-                android:textSize="25sp"
-                android:id="@+id/random_year_text_view"
+                android:textSize="35sp"
+                android:hint=" year"
+                android:textColor="@color/colorTrialCount"
+                android:background="@drawable/border" android:id="@+id/random_year_text_view"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                  app:layout_constraintBottom_toBottomOf="parent"
@@ -109,7 +114,7 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.559"
-        android:background="@color/colorPrimary">
+        android:background="@drawable/borderblue">
 
         <!-- day layout-->
         <LinearLayout
@@ -196,7 +201,7 @@
         android:layout_marginBottom="8dp"
         android:layout_marginTop="12dp"
         android:hint="@string/lucky"
-        android:textColor="@color/colorTrialCount"
+        android:textColor="@color/colorTrialCountContinue"
         android:textSize="50sp"
         app:layout_constraintBottom_toTopOf="@+id/linearLayout"
         app:layout_constraintHorizontal_bias="0.501"
@@ -277,12 +282,13 @@
 
     <Button
         android:id="@+id/generate_random_number"
+
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:background="@color/colorAccent"
+        android:layout_marginBottom="24dp"
         android:text="@string/generate_random_number"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.75"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent" />
 

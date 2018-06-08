@@ -1,17 +1,22 @@
 package com.app.smart.randomdate;
 
 import android.nfc.Tag;
+import android.os.CountDownTimer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
+import android.view.animation.AlphaAnimation;
+import android.view.animation.Animation;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.daimajia.androidanimations.library.Techniques;
+import com.daimajia.androidanimations.library.YoYo;
 import com.google.android.gms.ads.MobileAds;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -82,9 +87,7 @@ public class MainActivity extends AppCompatActivity {
                     return;
                 }
 
-
                 getEntryDate();
-
                 if (easyCheckBox.isChecked()) {
 
                     randomDay = random.nextInt(30) + 1;
@@ -92,9 +95,17 @@ public class MainActivity extends AppCompatActivity {
                     randomYear = random.nextInt(1) + yearToGet;
 
                     if (!randomEqualEntry()) {
-                        Toast.makeText(MainActivity.this, " well done ", Toast.LENGTH_LONG).show();
-                        trialCountNumber = 0;
+
+
+                        YoYo.with(Techniques.Tada)
+                                .duration(700)
+                                .repeat(10)
+                                .playOn(findViewById(R.id.trialCount));
+                        trialCount.setTextColor(getResources().getColor(R.color.colorTrialCount));
+
+
                     }
+
                     displayRandomDate();
                     trialCountNumber++;
 
@@ -129,6 +140,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
     }
+
     private boolean validateEntryData() {
         boolean result = true;
         if (TextUtils.isEmpty(dayEnteredNumber.getText().toString())) {
@@ -158,22 +170,39 @@ public class MainActivity extends AppCompatActivity {
         yearToGet = Integer.parseInt(yearUser);
     }
 
-    private boolean randomEqualEntry(){
+    private boolean randomEqualEntry() {
         boolean result = true;
         if (randomDay == dayToGet &&
                 randomMonth == monthToGet &&
-                randomYear == yearToGet){
+                randomYear == yearToGet) {
 
             result = false;
 
         }
-      return result;
+        return result;
     }
 
     private void displayRandomDate() {
 
+        YoYo.with(Techniques.Tada)
+                .duration(700)
+                .repeat(3)
+                .playOn(findViewById(R.id.random_day_text_view));
+
         dayRandomNumber.setText(String.valueOf(randomDay));
+
+        YoYo.with(Techniques.Tada)
+                .duration(700)
+                .repeat(3)
+                .playOn(findViewById(R.id.random_month_text_view));
+
         monthRandomNumber.setText(String.valueOf(randomMonth));
+
+        YoYo.with(Techniques.Tada)
+                .duration(700)
+                .repeat(3)
+                .playOn(findViewById(R.id.random_year_text_view));
+
         yearRandomNumber.setText(String.valueOf(randomYear));
         trialCount.setText(String.valueOf(trialCountNumber));
     }

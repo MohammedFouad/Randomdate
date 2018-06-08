@@ -4,5 +4,19 @@
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
 
-    <color name="colorTrialCount">#03be0f</color>
+    <color name="colorTrialCount">#ffffff</color>
+
+    <color name="colorTrialCountContinue">#ff0303</color>
+
+    <color name="divider">#03be0f</color>
+
+    <color name="divider_blue">#090ce2</color>
+
+    <color name="Yellow">#c95e00</color>
+
+    <color name="brawon">#9e3b02</color>
+
+    <color name="dark_yellow">#baae00</color>
+
+    <color name="dark_green">#007e2c</color>
 </resources>
