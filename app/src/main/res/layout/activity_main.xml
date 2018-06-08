@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="16dp"
-    android:background="@drawable/randombackground"
+    android:background="@drawable/background_monkey"
     tools:context=".MainActivity"
     >
 
@@ -62,9 +62,9 @@
             <TextView
                 android:textSize="35sp"
                 android:hint="month"
+                android:background="@drawable/textfieldshape"
                 android:textColor="@color/colorTrialCount"
-                android:background="@drawable/border"
-                android:id="@+id/random_month_text_view"
+                 android:id="@+id/random_month_text_view"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -91,7 +91,8 @@
                 android:textSize="35sp"
                 android:hint=" year"
                 android:textColor="@color/colorTrialCount"
-                android:background="@drawable/border" android:id="@+id/random_year_text_view"
+                android:background="@drawable/textfieldshape"
+                android:id="@+id/random_year_text_view"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                  app:layout_constraintBottom_toBottomOf="parent"
@@ -191,6 +192,10 @@
 
         </LinearLayout>
 
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent" />
+
 
     </LinearLayout>
 
@@ -238,7 +243,8 @@
             <CheckBox
                 android:id="@+id/easyCheckBox"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:background="@color/colorTrialCount"/>
 
         </LinearLayout>
 
