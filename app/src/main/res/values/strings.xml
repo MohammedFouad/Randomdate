@@ -3,11 +3,11 @@
 
     <!-- hint-->
 
-    <string name="day_random_number">day</string>
+    <string name="day_random_number">1</string>
 
-    <string name="month_random_number">month</string>
+    <string name="month_random_number">11</string>
 
-    <string name="year_random_number">year</string>
+    <string name="year_random_number">2011</string>
 
     <string name="lucky">0</string>
 
@@ -23,6 +23,11 @@
 
 
     <!-- Button-->
-    <string name="generate_random_number">Generate random number</string>
+    <string name="generate_random_number">Play</string>
     <string name="reset_counter">Reset</string>
+
+    <!-- Radio buttons text -->
+    <string name="levelOne">Level 1</string>
+    <string name="levelTwo">Level 2</string>
+    <string name="levelThree">Level 3</string>
 </resources>

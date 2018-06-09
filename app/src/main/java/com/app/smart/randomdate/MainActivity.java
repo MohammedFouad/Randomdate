@@ -8,13 +8,17 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -39,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
 
     private static final String TAG = "MainActivity";
 
-    TextView dayRandomNumber, monthRandomNumber, yearRandomNumber, trialCount;
+    TextView dayRandomNumber, monthRandomNumber, yearRandomNumber, trialCount, pointsEarned;
     Button generateRandomNumber;
     TextView dayEnteredNumber, monthEnteredNumber, yearEnteredNumber;
     CheckBox easyCheckBox, mediumCheckBox, hardCheckBox;
@@ -54,7 +58,12 @@ public class MainActivity extends AppCompatActivity {
 
     private int year, month, day;
 
-    int point;
+    int point = 0;
+
+    RadioGroup radioGroup;
+    RadioButton firstLevel, secondLevel, thirdLevel;
+
+    Toast toast;
 
     Random random;
 
@@ -62,6 +71,26 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+
+        LayoutInflater inflater = getLayoutInflater();
+        View view = inflater.inflate(R.layout.custom_toast,
+                (ViewGroup) findViewById(R.id.relativeLayout1));
+
+        //    text = findViewById(R.id.textView1);
+
+        toast = new Toast(this);
+        toast.setView(view);
+        toast.setDuration(Toast.LENGTH_SHORT);
+
+        radioGroup = findViewById(R.id.radioGroup);
+
+
+        firstLevel = findViewById(R.id.firstLevel);
+        secondLevel = findViewById(R.id.secondLevel);
+        thirdLevel = findViewById(R.id.thirdLevel);
+
+        pointsEarned = findViewById(R.id.pointsTextView);
 
         // Firebase real time database
         FirebaseDatabase database = FirebaseDatabase.getInstance();
@@ -83,32 +112,39 @@ public class MainActivity extends AppCompatActivity {
 
         generateRandomNumber = findViewById(R.id.generate_random_number);
 
-        //check box declaration
-        easyCheckBox = findViewById(R.id.easyCheckBox);
-        mediumCheckBox = findViewById(R.id.mediumCheckBox);
-        hardCheckBox = findViewById(R.id.hardCheckBox);
-
         resetButton = findViewById(R.id.resetCount);
         resetButton.setVisibility(resetButton.GONE);
 
         //initial value for counter
-        trialCountNumber = 0;
+        startRandom();
+
+        final Calendar c = Calendar.getInstance();
+        year = c.get(Calendar.YEAR);
+        month = c.get(Calendar.MONTH);
+        day = c.get(Calendar.DAY_OF_MONTH);
+
+        showDate(year, month + 1, day);
+
+    }
+
+    // Button to generate random numbers
+    public void startRandom() {
         generateRandomNumber.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                //check validated data entry
-                if (!validateEntryData()) {
+                int selectedRadioButton = radioGroup.getCheckedRadioButtonId();
+                if (trialCount == null) {
+                    trialCountNumber = 0;
+                }
+                // wait until reset button is clicked to reset counter
+                if (counterReset) {
                     return;
                 }
+                // user selected entry date from date picker
+               getEntryDate();
 
-                if(counterReset){
-                    return;
-                }
-
-                getEntryDate();
-
-                if (easyCheckBox.isChecked()) {
+                if (selectedRadioButton==firstLevel.getId()) {
 
                     randomDay = random.nextInt(30) + 1;
                     randomMonth = random.nextInt(1) + monthToGet;
@@ -120,58 +156,51 @@ public class MainActivity extends AppCompatActivity {
                                 .duration(700)
                                 .repeat(10)
                                 .playOn(findViewById(R.id.trialCount));
-                        trialCount.setTextColor(getResources().getColor(R.color.colorTrialCount));
-                       counterReset = true;
+                        trialCount.setTextColor(getResources().getColor(R.color.light_green));
+                        toast.show();
+                        counterReset = true;
                         resetButton.setVisibility(resetButton.VISIBLE);
                         generateRandomNumber.setVisibility(View.GONE);
                         point++;
-
-
+                        pointsEarned.setText(String.valueOf(point));
                     }
 
                     displayRandomDate();
                     trialCountNumber++;
 
                 }
-                if (mediumCheckBox.isChecked()) {
+                if (selectedRadioButton==secondLevel.getId()) {
 
                     randomDay = random.nextInt(30) + 1;
-                    randomMonth = random.nextInt(2) + monthToGet;
+                    randomMonth = random.nextInt(11) + 1;
                     randomYear = random.nextInt(1) + yearToGet;
 
                     if (!randomEqualEntry()) {
                         Toast.makeText(MainActivity.this, " well done ", Toast.LENGTH_LONG).show();
                         trialCountNumber = 0;
                         point = point + 10;
+                        pointsEarned.setText(String.valueOf(point));
                     }
                     displayRandomDate();
                     trialCountNumber++;
                 }
-                if (hardCheckBox.isChecked()) {
+                if (selectedRadioButton==thirdLevel.getId()) {
 
                     randomDay = random.nextInt(30) + 1;
                     randomMonth = random.nextInt(11) + 1;
-                    randomYear = random.nextInt(2) + yearToGet;
+                    randomYear = random.nextInt(118) + 1900;
 
                     if (!randomEqualEntry()) {
                         Toast.makeText(MainActivity.this, " well done ", Toast.LENGTH_LONG).show();
                         trialCountNumber = 0;
                         point = point + 100;
+                        pointsEarned.setText(String.valueOf(point));
                     }
                     displayRandomDate();
                     trialCountNumber++;
                 }
             }
         });
-
-
-        final Calendar c = Calendar.getInstance();
-        year = c.get(Calendar.YEAR);
-        month = c.get(Calendar.MONTH);
-        day = c.get(Calendar.DAY_OF_MONTH);
-
-        showDate(year, month + 1, day);
-
     }
 
     @SuppressWarnings("deprecation")
@@ -213,13 +242,15 @@ public class MainActivity extends AppCompatActivity {
         yearEnteredNumber.setText(String.valueOf(year1));
     }
 
-    // set method to countdown timer when user guess success
-
     // set method to reset countdown
 
     // set method to show points
 
-    public void resetCounter(View view){
+
+// Reset button
+    //@param counterReset is a boolean value that change to false when reset is complete
+
+    public void resetCounter(View view) {
         counterReset = false;
         trialCountNumber = 0;
 
@@ -227,44 +258,8 @@ public class MainActivity extends AppCompatActivity {
         generateRandomNumber.setVisibility(View.VISIBLE);
         trialCount.setTextColor(getResources().getColor(R.color.colorTrialCountContinue));
         displayRandomDate();
-
-
     }
-/*
-    private boolean delayTimeFinished(){
-        final boolean[] isTimeFinished = {true};
-    new CountDownTimer(30000, 1000) {
 
-        public void onTick(long millisUntilFinished) {
-            isTimeFinished[0] = false;
-        }
-        public void onFinish() {
-            isTimeFinished[0] = false;
-        }
-
-    }.start();
-
-    return isTimeFinished[0];
-    }
-*/
-    private boolean validateEntryData() {
-        boolean result = true;
-        if (TextUtils.isEmpty(dayEnteredNumber.getText().toString())) {
-            dayEnteredNumber.setError("Required");
-            result = false;
-        } else {
-            dayEnteredNumber.setError(null);
-        }
-        if (TextUtils.isEmpty(monthEnteredNumber.getText().toString())) {
-            monthEnteredNumber.setError("Required");
-            result = false;
-        }
-        if (TextUtils.isEmpty(yearEnteredNumber.getText().toString())) {
-            yearEnteredNumber.setError("Required");
-            result = false;
-        }
-        return result;
-    }
 
     private void getEntryDate() {
         dayUser = dayEnteredNumber.getText().toString();
