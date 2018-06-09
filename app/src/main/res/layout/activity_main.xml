@@ -6,8 +6,7 @@
     android:layout_height="match_parent"
     android:padding="16dp"
     android:background="@drawable/background_monkey"
-    tools:context=".MainActivity"
-    >
+    tools:context=".MainActivity">
 
     <LinearLayout
         android:id="@+id/displayDataLinearLayout"
@@ -114,8 +113,7 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.559"
-        android:background="@drawable/borderblue">
+        app:layout_constraintVertical_bias="0.559">
 
         <!-- day layout-->
         <LinearLayout
@@ -127,10 +125,12 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/day" />
+                android:text="@string/day"
+                android:textColor="@color/colorTrialCount"/>
 
-            <EditText
-                android:textSize="25sp"
+            <TextView
+                android:textSize="40sp"
+                android:textColor="@color/colorTrialCount"
                 android:id="@+id/entered_day_text_view"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -150,12 +150,14 @@
             android:orientation="vertical">
 
             <TextView
+                android:textColor="@color/colorTrialCount"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/month" />
 
-            <EditText
-                android:textSize="25sp"
+            <TextView
+                android:textSize="40sp"
+                android:textColor="@color/colorTrialCount"
                 android:id="@+id/entered_month_text_view"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -177,11 +179,13 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/year" />
+                android:text="@string/year"
+                android:textColor="@color/colorTrialCount"/>
 
 
-            <EditText
-                android:textSize="25sp"
+            <TextView
+                android:textSize="40sp"
+                android:textColor="@color/colorTrialCount"
                 android:id="@+id/entered_year_text_view"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -194,7 +198,10 @@
 
         <Button
             android:layout_width="wrap_content"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            android:background="@drawable/calendar"
+            android:backgroundTint="@color/colorPrimary"
+            android:onClick="setDate" />
 
 
     </LinearLayout>
@@ -238,7 +245,8 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/easy" />
+                android:text="@string/easy"
+                android:textColor="@color/colorTrialCount"/>
 
             <CheckBox
                 android:id="@+id/easyCheckBox"
@@ -257,7 +265,8 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/medium" />
+                android:text="@string/medium"
+                android:textColor="@color/colorTrialCount"/>
 
             <CheckBox
                 android:id="@+id/mediumCheckBox"
@@ -275,7 +284,8 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/hard" />
+                android:text="@string/hard"
+                android:textColor="@color/colorTrialCount"/>
 
             <CheckBox
                 android:id="@+id/hardCheckBox"
@@ -285,17 +295,29 @@
         </LinearLayout>
 
     </LinearLayout>
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
 
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintHorizontal_bias="0.75"
+    app:layout_constraintLeft_toLeftOf="parent"
+    app:layout_constraintRight_toRightOf="parent">
     <Button
         android:id="@+id/generate_random_number"
-
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="24dp"
-        android:text="@string/generate_random_number"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.75"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent" />
+        android:text="@string/generate_random_number" />
+
+    <Button
+        android:id="@+id/resetCount"
+        android:onClick="resetCounter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="24dp"
+        android:text="@string/reset_counter" />
+
+</LinearLayout>
 
 </android.support.constraint.ConstraintLayout>

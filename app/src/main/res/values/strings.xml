@@ -24,4 +24,5 @@
 
     <!-- Button-->
     <string name="generate_random_number">Generate random number</string>
+    <string name="reset_counter">Reset</string>
 </resources>
