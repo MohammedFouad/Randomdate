@@ -47,7 +47,6 @@ public class MainActivity extends AppCompatActivity {
     TextView dayRandomNumber, monthRandomNumber, yearRandomNumber, trialCount, pointsEarned;
     Button generateRandomNumber;
     TextView dayEnteredNumber, monthEnteredNumber, yearEnteredNumber;
-    CheckBox easyCheckBox, mediumCheckBox, hardCheckBox;
 
     int randomDay, randomMonth, randomYear, trialCountNumber;
     int dayToGet, monthToGet, yearToGet;
