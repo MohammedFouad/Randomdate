@@ -43,6 +43,7 @@ public class MainActivity extends AppCompatActivity {
 
     private static final String TAG = "MainActivity";
 
+    private DatabaseReference mDatabase;
     TextView dayRandomNumber, monthRandomNumber, yearRandomNumber, trialCount, pointsEarned;
     Button generateRandomNumber;
     TextView dayEnteredNumber, monthEnteredNumber, yearEnteredNumber;
@@ -92,9 +93,7 @@ public class MainActivity extends AppCompatActivity {
 
         pointsEarned = findViewById(R.id.pointsTextView);
 
-        // Firebase real time database
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference myRef = database.getReference("message");
+        mDatabase = FirebaseDatabase.getInstance().getReference();
 
         random = new Random();
         //random day, month and year
@@ -163,6 +162,7 @@ public class MainActivity extends AppCompatActivity {
                         generateRandomNumber.setVisibility(View.GONE);
                         point++;
                         pointsEarned.setText(String.valueOf(point));
+                        mDatabase.child("points").child("point").setValue(point);
                     }
 
                     displayRandomDate();
@@ -171,8 +171,8 @@ public class MainActivity extends AppCompatActivity {
                 }
                 if (selectedRadioButton==secondLevel.getId()) {
 
-                    randomDay = random.nextInt(30) + 1;
-                    randomMonth = random.nextInt(11) + 1;
+                    randomDay = random.nextInt(1) + 1;
+                    randomMonth = random.nextInt(1) + 1;
                     randomYear = random.nextInt(1) + yearToGet;
 
                     if (!randomEqualEntry()) {
@@ -180,6 +180,7 @@ public class MainActivity extends AppCompatActivity {
                         trialCountNumber = 0;
                         point = point + 10;
                         pointsEarned.setText(String.valueOf(point));
+                        mDatabase.child("points").child("point").setValue(point);
                     }
                     displayRandomDate();
                     trialCountNumber++;
