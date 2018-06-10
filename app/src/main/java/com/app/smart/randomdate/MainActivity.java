@@ -172,7 +172,7 @@ public class MainActivity extends AppCompatActivity {
                 if (selectedRadioButton==secondLevel.getId()) {
 
                     randomDay = random.nextInt(1) + 1;
-                    randomMonth = random.nextInt(1) + 1;
+                    randomMonth = random.nextInt(11) + 1;
                     randomYear = random.nextInt(1) + yearToGet;
 
                     if (!randomEqualEntry()) {

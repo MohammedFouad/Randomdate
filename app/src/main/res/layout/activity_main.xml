@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/background"
+    android:background="@drawable/backgroundtwo"
     android:padding="16dp"
     tools:context=".MainActivity">
 
@@ -25,6 +25,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:background="@drawable/borderblue"
             android:textColor="@color/colorTrialCount"
             android:textSize="70sp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -38,6 +39,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:background="@drawable/borderblue"
             android:textColor="@color/colorTrialCount"
             android:textSize="70sp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -50,6 +52,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:background="@drawable/borderblue"
             android:textColor="@color/colorTrialCount"
             android:textSize="70sp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -82,13 +85,13 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/day"
-                android:textColor="@color/colorTrialCount" />
+                android:textColor="@color/colorPrimary" />
 
             <TextView
                 android:id="@+id/entered_day_text_view"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/colorTrialCount"
+                android:textColor="@color/colorPrimaryDark"
                 android:textSize="40sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"
@@ -109,13 +112,13 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/month"
-                android:textColor="@color/colorTrialCount" />
+                android:textColor="@color/colorPrimary" />
 
             <TextView
                 android:id="@+id/entered_month_text_view"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/colorTrialCount"
+                android:textColor="@color/colorPrimaryDark"
                 android:textSize="40sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"
@@ -136,14 +139,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/year"
-                android:textColor="@color/colorTrialCount" />
+                android:textColor="@color/colorPrimary" />
 
 
             <TextView
                 android:id="@+id/entered_year_text_view"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/colorTrialCount"
+                android:textColor="@color/colorPrimaryDark"
                 android:textSize="40sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"
@@ -156,7 +159,7 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:background="@drawable/ic_date_range_black_24dp"
-            android:backgroundTint="@color/colorPrimary"
+            android:backgroundTint="@android:color/holo_blue_dark"
             android:onClick="setDate" />
 
 
@@ -236,16 +239,15 @@
             android:id="@+id/firstLevel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@color/colorPrimary"
             android:text="@string/levelOne"
-            android:textColor="@color/colorTrialCount" />
+            android:textColor="@color/colorPrimary" />
 
         <RadioButton
             android:id="@+id/secondLevel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/levelTwo"
-            android:textColor="@color/colorTrialCount" />
+            android:textColor="@color/colorPrimary" />
 
 
         <RadioButton
@@ -253,7 +255,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/levelThree"
-            android:textColor="@color/colorTrialCount" />
+            android:textColor="@color/colorPrimary" />
 
 
     </RadioGroup>
