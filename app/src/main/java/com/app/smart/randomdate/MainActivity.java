@@ -44,6 +44,7 @@ public class MainActivity extends AppCompatActivity {
     private static final String TAG = "MainActivity";
 
     private DatabaseReference mDatabase;
+
     TextView dayRandomNumber, monthRandomNumber, yearRandomNumber, trialCount, pointsEarned;
     Button generateRandomNumber;
     TextView dayEnteredNumber, monthEnteredNumber, yearEnteredNumber;
@@ -148,19 +149,13 @@ public class MainActivity extends AppCompatActivity {
                 if (selectedRadioButton==firstLevel.getId()) {
 
                     // change day only for the first level
-                    randomDay = random.nextInt(30) + 1;
+                    randomDay = random.nextInt(2) + 10;
                     // Keep month and tear unchanged value for the first level
                     randomMonth = random.nextInt(1) + monthToGet;
                     randomYear = random.nextInt(1) + yearToGet;
 
                     if (!randomEqualEntry()) {
-                        /*
-                        // A Library that makes random number animate when the random equals with the entry
-                        YoYo.with(Techniques.Tada)
-                                .duration(700)
-                                .repeat(10)
-                                .playOn(findViewById(R.id.trialCount));
-                                */
+
                         trialCount.setTextColor(getResources().getColor(R.color.light_green));
                         toast.show();
                         counterReset = true;
@@ -168,7 +163,8 @@ public class MainActivity extends AppCompatActivity {
                         generateRandomNumber.setVisibility(View.GONE);
                         point++;
                         pointsEarned.setText(String.valueOf(point));
-                        mDatabase.child("points").child("point").setValue(point);
+                        writeToDatabase(point);
+                       // mDatabase.child("points").child("point").setValue(point);
                     }
 
                     displayRandomDate();
@@ -313,5 +309,12 @@ public class MainActivity extends AppCompatActivity {
 
         yearRandomNumber.setText(String.valueOf(randomYear));
         trialCount.setText(String.valueOf(trialCountNumber));
+    }
+
+    // write to database
+
+    private void writeToDatabase(int point){
+
+        mDatabase.child("points").child("points count").setValue(String.valueOf(point));
     }
 }
