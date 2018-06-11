@@ -131,7 +131,10 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
+                // GET THE SELECTED RADIO BUTTON
                 int selectedRadioButton = radioGroup.getCheckedRadioButtonId();
+
+
                 if (trialCount == null) {
                     trialCountNumber = 0;
                 }
@@ -144,16 +147,20 @@ public class MainActivity extends AppCompatActivity {
 
                 if (selectedRadioButton==firstLevel.getId()) {
 
+                    // change day only for the first level
                     randomDay = random.nextInt(30) + 1;
+                    // Keep month and tear unchanged value for the first level
                     randomMonth = random.nextInt(1) + monthToGet;
                     randomYear = random.nextInt(1) + yearToGet;
 
                     if (!randomEqualEntry()) {
-
+                        /*
+                        // A Library that makes random number animate when the random equals with the entry
                         YoYo.with(Techniques.Tada)
                                 .duration(700)
                                 .repeat(10)
                                 .playOn(findViewById(R.id.trialCount));
+                                */
                         trialCount.setTextColor(getResources().getColor(R.color.light_green));
                         toast.show();
                         counterReset = true;
@@ -170,7 +177,7 @@ public class MainActivity extends AppCompatActivity {
                 }
                 if (selectedRadioButton==secondLevel.getId()) {
 
-                    randomDay = random.nextInt(1) + 1;
+                    randomDay = random.nextInt(30) + 1;
                     randomMonth = random.nextInt(11) + 1;
                     randomYear = random.nextInt(1) + yearToGet;
 
