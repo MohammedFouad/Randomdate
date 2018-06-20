@@ -93,13 +93,13 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/day"
-                android:textColor="@color/colorPrimary" />
+                android:textColor="@color/white" />
 
             <TextView
                 android:id="@+id/entered_day_text_view"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/colorPrimaryDark"
+                android:textColor="@color/white"
                 android:textSize="40sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"
@@ -120,13 +120,13 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/month"
-                android:textColor="@color/colorPrimary" />
+                android:textColor="@color/white" />
 
             <TextView
                 android:id="@+id/entered_month_text_view"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/colorPrimaryDark"
+                android:textColor="@color/white"
                 android:textSize="40sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"
@@ -176,7 +176,7 @@
     <TextView
         android:id="@+id/trialCount"
         android:layout_width="wrap_content"
-        android:layout_height="82dp"
+        android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
         android:layout_marginLeft="284dp"
         android:layout_marginRight="60dp"
@@ -184,7 +184,7 @@
         android:layout_marginTop="8dp"
         android:hint="@string/lucky"
         android:textColor="@color/colorPrimary"
-        android:textSize="70sp"
+        android:textSize="50sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -194,19 +194,26 @@
 
     <Button
         android:id="@+id/generate_random_number"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
-        android:layout_marginEnd="52dp"
-        android:layout_marginRight="52dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginEnd="30dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="16dp"
         android:layout_weight="1"
-        android:background="@drawable/ic_play_arrow_black_24dp"
+        android:textSize="40sp"
+        style="@style/Animation.AppCompat.DropDownUp"
         android:backgroundTint="@color/colorPrimary"
+        android:textColor="@color/white"
+        android:text="PLAY "
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/radioGroup"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.503"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.914" />
+        app:layout_constraintVertical_bias="0.982" />
 
     <Button
         android:id="@+id/resetCount"
@@ -219,15 +226,14 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_weight="1"
-        android:onClick="resetCounter"
-     android:backgroundTint="@color/colorPrimary"
         android:background="@drawable/ic_refresh_black_24dp"
+        android:backgroundTint="@color/colorPrimary"
+        android:onClick="resetCounter"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/generate_random_number"
-        app:layout_constraintHorizontal_bias="0.181"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintVertical_bias="0.951" />
 
 
     <RadioGroup
@@ -244,21 +250,25 @@
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0">
+        app:layout_constraintVertical_bias="0.799">
 
         <RadioButton
             android:id="@+id/firstLevel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/levelOne"
-            android:textColor="@color/colorPrimary" />
+            android:textSize="20sp"
+            android:textColor="@color/white"
+            android:buttonTint="@color/white"/>
 
         <RadioButton
             android:id="@+id/secondLevel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/levelTwo"
-            android:textColor="@color/colorPrimary" />
+            android:textSize="20sp"
+            android:textColor="@color/white"
+            android:buttonTint="@color/white"/>
 
 
         <RadioButton
@@ -266,7 +276,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/levelThree"
-            android:textColor="@color/colorPrimary" />
+            android:buttonTint="@color/white"
+            android:textColor="@color/white" />
 
 
     </RadioGroup>
@@ -283,10 +294,10 @@
         android:layout_marginTop="8dp"
         android:text="@string/lucky"
         android:textColor="@android:color/holo_green_light"
-        android:textSize="70sp"
+        android:textSize="50sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.821"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0" />
