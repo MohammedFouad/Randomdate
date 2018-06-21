@@ -2,6 +2,7 @@ package com.app.smart.randomdate;
 
 import android.app.DatePickerDialog;
 import android.app.Dialog;
+import android.content.Intent;
 import android.nfc.Tag;
 import android.os.CountDownTimer;
 import android.support.v7.app.AppCompatActivity;
@@ -9,6 +10,8 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AlphaAnimation;
@@ -61,8 +64,7 @@ public class MainActivity extends AppCompatActivity {
 
     int point = 0;
 
-    RadioGroup radioGroup;
-    RadioButton firstLevel, secondLevel, thirdLevel;
+    int selectedLevel;
 
     Toast toast;
 
@@ -74,6 +76,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
 
+        // custom Toast
         LayoutInflater inflater = getLayoutInflater();
         View view = inflater.inflate(R.layout.custom_toast,
                 (ViewGroup) findViewById(R.id.relativeLayout1));
@@ -84,12 +87,6 @@ public class MainActivity extends AppCompatActivity {
         toast.setView(view);
         toast.setDuration(Toast.LENGTH_SHORT);
 
-        radioGroup = findViewById(R.id.radioGroup);
-
-
-        firstLevel = findViewById(R.id.firstLevel);
-        secondLevel = findViewById(R.id.secondLevel);
-        thirdLevel = findViewById(R.id.thirdLevel);
 
         pointsEarned = findViewById(R.id.pointsTextView);
 
@@ -133,7 +130,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 // GET THE SELECTED RADIO BUTTON
-                int selectedRadioButton = radioGroup.getCheckedRadioButtonId();
+
 
 
                 if (trialCount == null) {
@@ -144,9 +141,9 @@ public class MainActivity extends AppCompatActivity {
                     return;
                 }
                 // user selected entry date from date picker
-               getEntryDate();
+                getEntryDate();
 
-                if (selectedRadioButton==firstLevel.getId()) {
+                if (selectedLevel == 1) {
 
                     // change day only for the first level
                     randomDay = random.nextInt(2) + 10;
@@ -164,14 +161,14 @@ public class MainActivity extends AppCompatActivity {
                         point++;
                         pointsEarned.setText(String.valueOf(point));
                         writeToDatabase(point);
-                       // mDatabase.child("points").child("point").setValue(point);
+                        // mDatabase.child("points").child("point").setValue(point);
                     }
 
                     displayRandomDate();
                     trialCountNumber++;
 
                 }
-                if (selectedRadioButton==secondLevel.getId()) {
+                if (selectedLevel == 2) {
 
                     randomDay = random.nextInt(30) + 1;
                     randomMonth = random.nextInt(11) + 1;
@@ -187,7 +184,7 @@ public class MainActivity extends AppCompatActivity {
                     displayRandomDate();
                     trialCountNumber++;
                 }
-                if (selectedRadioButton==thirdLevel.getId()) {
+                if (selectedLevel == 3) {
 
                     randomDay = random.nextInt(30) + 1;
                     randomMonth = random.nextInt(11) + 1;
@@ -313,8 +310,58 @@ public class MainActivity extends AppCompatActivity {
 
     // write to database
 
-    private void writeToDatabase(int point){
+    private void writeToDatabase(int point) {
 
         mDatabase.child("points").child("points count").setValue(String.valueOf(point));
     }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.main_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int i = item.getItemId();
+
+        switch (i) {
+
+            case R.id.level_one:
+
+                selectedLevel = 1;
+
+                break;
+
+            case R.id.level_two:
+
+                selectedLevel = 2;
+
+                break;
+
+            case R.id.level_three:
+                selectedLevel = 3;
+
+                break;
+
+            default:
+                selectedLevel = 1;
+
+               break;
+
+        }
+
+        return true;
+    }
 }
+
+/*
+* if (i == R.id.level_one) {
+
+            return true;
+        }
+        else {
+            return super.onOptionsItemSelected(item);
+        }
+*
+* */

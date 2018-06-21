@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".MainActivity">
+
+    <item
+        android:id="@+id/level_one"
+        android:title="@string/levelOne"
+        android:visible="true"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/level_two"
+        android:title="@string/levelTwo"
+        android:visible="true"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/level_three"
+        android:title="@string/levelThree"
+        android:visible="true"
+        app:showAsAction="never" />
+</menu>
