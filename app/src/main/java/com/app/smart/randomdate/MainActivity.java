@@ -29,6 +29,9 @@ import android.widget.Toast;
 
 import com.daimajia.androidanimations.library.Techniques;
 import com.daimajia.androidanimations.library.YoYo;
+import com.google.android.gms.ads.AdListener;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.InterstitialAd;
 import com.google.android.gms.ads.MobileAds;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
@@ -52,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
 
     private DatabaseReference mDatabase;
 
-    TextView dayRandomNumber, monthRandomNumber, yearRandomNumber, trialCount, pointsEarned;
+    TextView dayRandomNumber, monthRandomNumber, yearRandomNumber, trialCount, pointsEarned, levelDisplay;
     Button generateRandomNumber;
     TextView dayEnteredNumber, monthEnteredNumber, yearEnteredNumber;
 
@@ -74,10 +77,16 @@ public class MainActivity extends AppCompatActivity {
 
     Random random;
 
+    private InterstitialAd mInterstitialAd;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        mInterstitialAd = new InterstitialAd(this);
+        mInterstitialAd.setAdUnitId(this.getResources().getString(R.string.admob_interstitial_id));
+        mInterstitialAd.loadAd(new AdRequest.Builder().build());
 
 
         // custom Toast
@@ -115,6 +124,8 @@ public class MainActivity extends AppCompatActivity {
         resetButton = findViewById(R.id.resetCount);
         resetButton.setVisibility(resetButton.GONE);
 
+        levelDisplay = findViewById(R.id.level);
+
         //initial value for counter
         startRandom();
 
@@ -136,11 +147,33 @@ public class MainActivity extends AppCompatActivity {
                 // not necessary to choose level
                 if (selectedLevel == 0) {
                     selectedLevel = 1;
+                    levelDisplay.setText("Level 1");
                 }
 
 
                 if (trialCount == null) {
                     trialCountNumber = 0;
+                }
+
+                if(trialCountNumber % 10 == 0){
+
+                    if (mInterstitialAd.isLoaded()) {
+                        mInterstitialAd.show();
+
+                        // Toast.makeText(this, " inside ad method", Toast.LENGTH_LONG).show();
+                    } else {
+                        Log.d("TAG", "The interstitial wasn't loaded yet.  next button");
+                    }
+
+                    mInterstitialAd.setAdListener(new AdListener() {
+                        @Override
+                        public void onAdClosed() {
+                            // Load the next interstitial.
+                            mInterstitialAd.loadAd(new AdRequest.Builder().build());
+                        }
+                    });
+
+
                 }
                 // wait until reset button is clicked to reset counter
                 if (counterReset) {
@@ -336,17 +369,20 @@ public class MainActivity extends AppCompatActivity {
             case R.id.level_one:
 
                 selectedLevel = 1;
+                levelDisplay.setText("Level 1");
 
                 break;
 
             case R.id.level_two:
 
                 selectedLevel = 2;
+                levelDisplay.setText("Level 2");
 
                 break;
 
             case R.id.level_three:
                 selectedLevel = 3;
+                levelDisplay.setText("Level 3");
 
                 break;
 
