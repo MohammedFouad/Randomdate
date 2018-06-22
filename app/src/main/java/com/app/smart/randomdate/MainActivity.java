@@ -5,6 +5,8 @@ import android.app.Dialog;
 import android.content.Intent;
 import android.nfc.Tag;
 import android.os.CountDownTimer;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -28,6 +30,7 @@ import android.widget.Toast;
 import com.daimajia.androidanimations.library.Techniques;
 import com.daimajia.androidanimations.library.YoYo;
 import com.google.android.gms.ads.MobileAds;
+import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -63,7 +66,7 @@ public class MainActivity extends AppCompatActivity {
 
     private int year, month, day;
 
-    int point ;
+    int point;
 
     int selectedLevel;
 
@@ -131,7 +134,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 // not necessary to choose level
-                if (selectedLevel == 0){
+                if (selectedLevel == 0) {
                     selectedLevel = 1;
                 }
 
@@ -245,13 +248,13 @@ public class MainActivity extends AppCompatActivity {
         yearEnteredNumber.setText(String.valueOf(year1));
     }
 
-        // set method to reset countdown
+    // set method to reset countdown
 
-        // set method to show points
+    // set method to show points
 
 
-        // Reset button
-        //@param counterReset is a boolean value that change to false when reset is complete
+    // Reset button
+    //@param counterReset is a boolean value that change to false when reset is complete
 
     public void resetCounter(View view) {
         counterReset = false;
@@ -347,10 +350,16 @@ public class MainActivity extends AppCompatActivity {
 
                 break;
 
+            case R.id.reset_counter:
+                point = 0;
+                pointsEarned.setText(String.valueOf(point));
+                writeToDatabase(point);
+                break;
+
             default:
                 selectedLevel = 1;
 
-               break;
+                break;
 
         }
 
@@ -359,6 +368,40 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onStart() {
+
+        DatabaseReference scoresRef = FirebaseDatabase.getInstance().getReference("points");
+        scoresRef.orderByValue().limitToLast(4).addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+                pointsEarned.setText(String.valueOf(dataSnapshot.getValue()));
+                String test = String.valueOf(dataSnapshot.getValue());
+
+                point = Integer.parseInt(test);
+
+            }
+
+            @Override
+            public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+            }
+
+            @Override
+            public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
 
         super.onStart();
     }
