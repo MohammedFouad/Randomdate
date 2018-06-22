@@ -40,6 +40,7 @@ import java.util.GregorianCalendar;
 import java.util.Locale;
 import java.util.Random;
 
+import static java.lang.Math.floor;
 import static java.lang.Math.random;
 
 public class MainActivity extends AppCompatActivity {
@@ -62,7 +63,7 @@ public class MainActivity extends AppCompatActivity {
 
     private int year, month, day;
 
-    int point = 0;
+    int point ;
 
     int selectedLevel;
 
@@ -129,8 +130,10 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                // GET THE SELECTED RADIO BUTTON
-
+                // not necessary to choose level
+                if (selectedLevel == 0){
+                    selectedLevel = 1;
+                }
 
 
                 if (trialCount == null) {
@@ -146,8 +149,8 @@ public class MainActivity extends AppCompatActivity {
                 if (selectedLevel == 1) {
 
                     // change day only for the first level
-                    randomDay = random.nextInt(2) + 10;
-                    // Keep month and tear unchanged value for the first level
+                    randomDay = random.nextInt(30) + 1;
+                    // Keep month and year unchanged value for the first level
                     randomMonth = random.nextInt(1) + monthToGet;
                     randomYear = random.nextInt(1) + yearToGet;
 
@@ -242,13 +245,13 @@ public class MainActivity extends AppCompatActivity {
         yearEnteredNumber.setText(String.valueOf(year1));
     }
 
-    // set method to reset countdown
+        // set method to reset countdown
 
-    // set method to show points
+        // set method to show points
 
 
-// Reset button
-    //@param counterReset is a boolean value that change to false when reset is complete
+        // Reset button
+        //@param counterReset is a boolean value that change to false when reset is complete
 
     public void resetCounter(View view) {
         counterReset = false;
@@ -353,15 +356,17 @@ public class MainActivity extends AppCompatActivity {
 
         return true;
     }
+
+    @Override
+    protected void onStart() {
+
+        super.onStart();
+    }
+
+    @Override
+    protected void onStop() {
+
+        super.onStop();
+    }
 }
 
-/*
-* if (i == R.id.level_one) {
-
-            return true;
-        }
-        else {
-            return super.onOptionsItemSelected(item);
-        }
-*
-* */

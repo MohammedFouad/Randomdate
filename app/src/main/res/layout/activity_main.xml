@@ -31,7 +31,6 @@
             android:textSize="60sp"
             android:fontFamily="casual"
             android:textStyle="italic"
-
             android:layout_marginRight="5dp"
             android:layout_marginEnd="5dp"
             app:layout_constraintBottom_toBottomOf="parent"
