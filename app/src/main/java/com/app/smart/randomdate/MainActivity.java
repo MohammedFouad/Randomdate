@@ -2,7 +2,10 @@ package com.app.smart.randomdate;
 
 import android.app.DatePickerDialog;
 import android.app.Dialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.net.Uri;
 import android.nfc.Tag;
 import android.os.CountDownTimer;
 import android.support.annotation.NonNull;
@@ -53,6 +56,8 @@ public class MainActivity extends AppCompatActivity {
 
     private static final String TAG = "MainActivity";
 
+    SharedPreferences sharedPreferences;
+
     private DatabaseReference mDatabase;
 
     TextView dayRandomNumber, monthRandomNumber, yearRandomNumber, trialCount, pointsEarned, levelDisplay;
@@ -76,6 +81,9 @@ public class MainActivity extends AppCompatActivity {
     Toast toast;
 
     Random random;
+    public static final String MyPREFERENCES = "MyPrefs";
+
+    public static final String Pointsgranted = "pointKey";
 
     private InterstitialAd mInterstitialAd;
 
@@ -88,6 +96,13 @@ public class MainActivity extends AppCompatActivity {
         mInterstitialAd.setAdUnitId(this.getResources().getString(R.string.admob_interstitial_id));
         mInterstitialAd.loadAd(new AdRequest.Builder().build());
 
+
+        sharedPreferences = getSharedPreferences(MyPREFERENCES,
+                Context.MODE_PRIVATE);
+
+        if (sharedPreferences.contains(Pointsgranted)) {
+        pointsEarned.setText(sharedPreferences.getString(Pointsgranted, ""));
+        }
 
         // custom Toast
         LayoutInflater inflater = getLayoutInflater();
@@ -138,6 +153,32 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    public void save() {
+
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        String pointsToString = String.valueOf(point);
+
+        editor.putString(Pointsgranted, pointsToString );
+        editor.commit();
+        Toast.makeText(MainActivity.this," inside save method  "
+                + Pointsgranted + "   "+ pointsToString, Toast.LENGTH_SHORT).show();
+
+        // print saved points to log
+     //Log.d(pointsGranted, " points");
+    }
+
+    /*
+    public void get() {
+
+        sharedPreferences = getSharedPreferences(mypreference,
+                Context.MODE_PRIVATE);
+
+sharedPreferences.getInt(pointsGranted,point);
+        pointsEarned.setText(pointsGranted);
+
+    }
+
+*/
     // Button to generate random numbers
     public void startRandom() {
         generateRandomNumber.setOnClickListener(new View.OnClickListener() {
@@ -155,7 +196,7 @@ public class MainActivity extends AppCompatActivity {
                     trialCountNumber = 0;
                 }
 
-                if(trialCountNumber % 10 == 0){
+                if (trialCountNumber % 10 == 0) {
 
                     if (mInterstitialAd.isLoaded()) {
                         mInterstitialAd.show();
@@ -185,7 +226,7 @@ public class MainActivity extends AppCompatActivity {
                 if (selectedLevel == 1) {
 
                     // change day only for the first level
-                    randomDay = random.nextInt(30) + 1;
+                    randomDay = random.nextInt(2) + 28;
                     // Keep month and year unchanged value for the first level
                     randomMonth = random.nextInt(1) + monthToGet;
                     randomYear = random.nextInt(1) + yearToGet;
@@ -200,6 +241,9 @@ public class MainActivity extends AppCompatActivity {
                         point++;
                         pointsEarned.setText(String.valueOf(point));
                         writeToDatabase(point);
+                        save();
+                       // Toast.makeText(MainActivity.this," after save mathod", Toast.LENGTH_SHORT).show();
+
                         // mDatabase.child("points").child("point").setValue(point);
                     }
 
@@ -392,6 +436,15 @@ public class MainActivity extends AppCompatActivity {
                 writeToDatabase(point);
                 break;
 
+            case R.id.action_share:
+
+                Intent myIntent = new Intent(Intent.ACTION_SEND);
+                myIntent.setType("text/plain");
+                myIntent.putExtra(Intent.EXTRA_TEXT, Uri.parse("https://play.google.com/store/apps/details?id=com.app.smart.randomdate") + "  " + getString(R.string.share_message));
+                if (myIntent.resolveActivity(getPackageManager()) != null) {
+                    startActivity(Intent.createChooser(myIntent, "share "));
+                }
+
             default:
                 selectedLevel = 1;
 
@@ -402,18 +455,24 @@ public class MainActivity extends AppCompatActivity {
         return true;
     }
 
+    /*
     @Override
     protected void onStart() {
+
+//        if ((Integer.parseInt(pointsGranted)) >0){
+//            get();
+//        }
+
 
         DatabaseReference scoresRef = FirebaseDatabase.getInstance().getReference("points");
         scoresRef.orderByValue().limitToLast(4).addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
 
-                pointsEarned.setText(String.valueOf(dataSnapshot.getValue()));
-                String test = String.valueOf(dataSnapshot.getValue());
+                //  pointsEarned.setText(String.valueOf(dataSnapshot.getValue()));
+                // String test = String.valueOf(dataSnapshot.getValue());
 
-                point = Integer.parseInt(test);
+                //point = Integer.parseInt(test);
 
             }
 
@@ -441,11 +500,7 @@ public class MainActivity extends AppCompatActivity {
 
         super.onStart();
     }
+*/
 
-    @Override
-    protected void onStop() {
-
-        super.onStop();
-    }
 }
 
